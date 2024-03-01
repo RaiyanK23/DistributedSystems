@@ -1,6 +1,6 @@
-#include "Proxy.h"
+#include "NYSEServer.h"
 
-Proxy::Proxy()
+NYSEServer::NYSEServer()
 {
     if((serverSock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
     {
@@ -10,7 +10,7 @@ Proxy::Proxy()
 
     memset(&serverInfo, 0, sizeof(serverInfo));
     serverInfo.sin_family = AF_INET;
-    serverInfo.sin_port = htons(PORT);
+    serverInfo.sin_port = htons(NYSEPORT);
     serverInfo.sin_addr.s_addr = htonl(INADDR_ANY);
 
     if(bind(serverSock, (sockaddr*)&serverInfo, sizeof(serverInfo)) == -1)
@@ -19,7 +19,7 @@ Proxy::Proxy()
         close(serverSock);
         exit(1);
     }
-    std::cout << "Proxy Server now running on port " << PORT << '\n';
+    std::cout << "NYSEServer now running on port " << NYSEPORT << '\n';
 
     if(listen(serverSock, 5) == -1)
     {
@@ -28,15 +28,15 @@ Proxy::Proxy()
         exit(1);
     }
 
-    std::cout << "Proxy Server is now listening!\n";
+    std::cout << "NYSEServer is now listening!\n";   
 }
 
-Proxy::~Proxy()
+NYSEServer::~NYSEServer()
 {
-    close(serverSock);   
+    close(serverSock);
 }
 
-void Proxy::acceptConnection()
+void NYSEServer::acceptConnection()
 {
     while(true)
     {
@@ -48,13 +48,13 @@ void Proxy::acceptConnection()
             exit(1);
         }
 
-        std::cout << "Proxy Server accepted a client connection!\n";
+        std::cout << "NYSEServer accepted a client connection!\n";
 
-        std::thread(&Proxy::handleConnection, this, clientSock).detach();
+        std::thread(&NYSEServer::handleConnection, this, clientSock).detach();
     }
 }
 
-void Proxy::handleConnection(int clientSock)
+void NYSEServer::handleConnection(int clientSock)
 {
     close(clientSock);
 }
