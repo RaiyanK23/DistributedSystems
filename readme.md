@@ -14,12 +14,12 @@ This program sets up a proxy server and an NYSE server, allowing clients to conn
 Compile the program using the following command:
 
 ```bash
-g++ main.cpp Proxy.cpp NYSEServer.cpp -o server -lpthread
+g++ main.cpp Proxy.cpp NYSEServer.cpp -lpthread
 ```
 
 ## Run the Program
 ```bash
-./server
+./a.out
 ```
 
 # Testing the Server Connection with Telnet
