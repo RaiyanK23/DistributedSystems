@@ -14,7 +14,7 @@ This program sets up a proxy server and an NYSE server, allowing clients to conn
 Compile the program using the following command:
 
 ```bash
-g++ main.cpp Proxy.cpp NYSEServer.cpp -lpthread
+g++ NYSEServer.cpp Server.cpp main.cpp Proxy.cpp
 ```
 
 ## Run the Program

@@ -1,24 +1,13 @@
-#include <iostream>
-#include <sys/socket.h>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <iostream>
-#include<cstring>
-#include<thread>
+#ifndef NYSESERVER_H
+#define NYSESERVER_H
+#include "Server.h"
 
-#define NYSEPORT 8010
-
-class NYSEServer
+class NYSEServer : public Server
 {
-private:
-    int serverSock, clientSock;
-    struct sockaddr_in serverInfo, clientInfo;
-    socklen_t clientSize;
-
 public:
-    NYSEServer();
+    NYSEServer(const uint16_t portNumber, const std::string& serverName);
     ~NYSEServer();
 
-    void acceptConnection();
-    void handleConnection(int clientSock);
+    void handleConnection(const int clientSock) override;
 };
+#endif
