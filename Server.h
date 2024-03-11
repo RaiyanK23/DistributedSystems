@@ -20,7 +20,7 @@ protected:
     const uint16_t port;
 
 public:
-    Server(const uint16_t portNumber, const std::string& serverName);
+    Server(const uint16_t& portNumber, const std::string& serverName);
     virtual ~Server();
 
     void acceptConnection();

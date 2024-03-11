@@ -6,7 +6,7 @@
 class Proxy : public Server
 {
 public:
-    Proxy(const uint16_t portNumber, const std::string& serverName);
+    Proxy(const uint16_t& portNumber, const std::string& serverName);
     ~Proxy();
 
     void handleConnection(const int clientSock) override;

@@ -1,6 +1,6 @@
 #include "Server.h"
 
-Server::Server(const uint16_t portNumber, const std::string& serverName) : port(portNumber), sName(serverName)
+Server::Server(const uint16_t& portNumber, const std::string& serverName) : port(portNumber), sName(serverName)
 {
     if((serverSock = socket(AF_INET, SOCK_STREAM, 0)) == -1)
     {
