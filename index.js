@@ -1,5 +1,5 @@
 // Configuration for the fetch request
-const stock = "AAPL";
+const stock = "ALPHABET";
 const requestOptions = {
   method: 'POST',
   headers: {
