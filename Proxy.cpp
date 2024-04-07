@@ -42,7 +42,7 @@ void Proxy::handlePostRequest(const int clientSock, const std::string& request)
         
 
     std::vector<int> portsToTry = {8010, 8011, 8012};
-    int serverSock = createSocket("192.168.48.128", portsToTry);
+    int serverSock = createSocket("127.0.0.1", portsToTry);
     if (serverSock == -1) {
         // All connection attempts failed, send HTTP failure message to the client
         std::string response = "HTTP/1.1 503 Service Unavailable\r\n\r\n";

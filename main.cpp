@@ -21,6 +21,11 @@ int main() {
 
     // Main thread will continue to run other tasks or wait for user input
     // ...
+    
+    int socket1=replicatedNYSE.createSocket();
+    replicatedNYSE.initiateElectionProcess();
+    replicatedNYSE.messageListener();
+
 
     return 0;
 }
