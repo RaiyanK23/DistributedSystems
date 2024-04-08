@@ -12,11 +12,24 @@ This program sets up a proxy server and an NYSE server, allowing clients to conn
 
 ## Compilation
 
-Compile the program using the following command:
+Compile the program and start database replicas using the following commands:
 
 ```bash
 g++ -std=c++14 NYSEServer.cpp Server.cpp main.cpp Proxy.cpp -lpthread $(pkg-config --cflags --libs libmongocxx)
 ```
+
+```bash
+ mongod --replSet rs0 --port 27017 --bind_ip localhost --dbpath ./srv/mongodb/rs0-0 --oplogSize 128
+```
+
+```bash
+ mongod --replSet rs0 --port 27018 --bind_ip localhost --dbpath ./srv/mongodb/rs0-1 --oplogSize 128
+```
+
+```bash
+ mongod --replSet rs0 --port 27019 --bind_ip localhost --dbpath ./srv/mongodb/rs0-2 --oplogSize 128
+```
+
 
 ## Run the Program
 ```bash
