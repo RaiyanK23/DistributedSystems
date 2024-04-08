@@ -16,7 +16,7 @@ int main() {
     // NYSEServer primaryServer(8010, "NYSEServer");
     // primaryServer.acceptConnection();
 
-    ReplicatedServer<Proxy> replicatedProxy(NUM_REPLICAS, 8080, "Proxy");
+   // ReplicatedServer<Proxy> replicatedProxy(NUM_REPLICAS, 8080, "Proxy");
     
 
     // Create a replicated NYSE server

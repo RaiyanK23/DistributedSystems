@@ -9,8 +9,11 @@
 #include <vector>
 
 constexpr int MAX_BUFFER_SIZE = 2048;
+
+// Constructor for NYSEServer class
 NYSEServer::NYSEServer(const uint16_t &portNumber, const std::string &serverName) : Server(portNumber, serverName) {}
 
+// Function to handle incoming connections
 void NYSEServer::handleConnection(const int clientSock)
 {
     // Buffer to store data received from the proxy
@@ -28,16 +31,13 @@ void NYSEServer::handleConnection(const int clientSock)
 
     // Convert the received data to a string
     std::string requestData(buffer.data(), bytesRead);
-   
-    
 
+    // Print received data
     std::cout << "Data received from proxy: " << requestData << std::endl;
 
     // Create a JSON string with the received data
     std::ostringstream oss;
-    //oss << "{\"stock\": \"" << requestData << "\"}";
-
-    oss << requestStockMongo(requestData);
+    oss << requestStockMongo(requestData); // Call function to fetch stock data from MongoDB
 
     std::string jsonData = oss.str();
 
@@ -50,41 +50,30 @@ void NYSEServer::handleConnection(const int clientSock)
     close(clientSock);
 }
 
-// void NYSEServer::initializeMongoClient() {
-//     try {
-//         // Initialize the MongoDB client instance
-//         _mongoClient = mongocxx::client{mongocxx::uri{}};
-//     } catch (const mongocxx::exception& e) {
-//         std::cerr << "Error initializing MongoDB client: " << e.what() << std::endl;
-//         // Handle initialization error
-//     }
-// }
-
+// Function to fetch stock data from MongoDB
 std::string NYSEServer::requestStockMongo(const std::string stockName)
 {
 
     std::string jsonString;
     try
     {
-        
-
-        mongocxx::uri uri("mongodb://localhost:27018");
+        // Establish connection to MongoDB replicated database
+        mongocxx::uri uri("mongodb://localhost:27017");
         mongocxx::client client(uri);
 
+        // Access database and collection
         auto db = client["CPSC599_Project"];
         auto collection = db["StockMetrics"];
 
-        
+        // Create filter for querying stock data
         auto filter = bsoncxx::builder::stream::document{} << "StockName" << stockName << bsoncxx::builder::stream::finalize;
+        
+        // Query MongoDB and iterate through results
         auto cursor = collection.find({filter});
-
-          // String to store concatenated JSON strings
-
-        // Assuming cursor is an iterable container of bsoncxx::document::view instances
         for (auto&& doc : cursor) {
+            // Convert BSON documents to JSON strings and concatenate
             jsonString += bsoncxx::to_json(doc);
         }
-        
     }
     catch (const std::exception &e)
     {
@@ -95,4 +84,5 @@ std::string NYSEServer::requestStockMongo(const std::string stockName)
     return jsonString;
 }
 
+// Destructor for NYSEServer class
 NYSEServer::~NYSEServer() {}
