@@ -9,6 +9,7 @@ This program sets up a proxy server and an NYSE server, allowing clients to conn
 - POSIX threads library (for multithreading)
 (these are already included in the code)
 - local installation of mongodb with 3 replicas running on ports 27017, 27018, 27019
+- uncompress srv.zip
 
 ## Compilation
 
