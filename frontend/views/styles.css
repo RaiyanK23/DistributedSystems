@@ -1,0 +1,66 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: #3A3B3C;
+}
+
+h1 {
+    font-size: 35px !important;
+}
+
+h2 {
+    font-size: 18px !important;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem 0;
+}
+
+.navbar .logo {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+#search-input {
+    max-width: 400px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #333;
+}
+
+#search-button {
+    padding: 10px 20px;
+    background-color: white;
+    color: grey;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#stock-container {
+    margin: 20px 75px;
+}
+
+.stock-card {
+    width: 100%;
+    cursor: pointer;
+    background-color: #ECECEC;
+    padding: 40px 20px;
+}
+
+.stock-name {
+}
