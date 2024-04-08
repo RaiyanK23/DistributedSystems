@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'views')))
 app.get('/', (req, res) => {
     let stock= {
         _id: '6611a71f66c74626f60c9dc2',
-        StockName: 'ALPHABET',
+        StockName: 'AAPL',
         Price: 690,
         MarketCap: 200000,
         PERatio: 2,
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 
 app.get('/api/stock', (req, res) => {
     // Configuration for the fetch request
-    const stockName = req.query.name;
+    const stock = req.query.name;
     const requestOptions = {
     method: 'POST',
     headers: {
@@ -43,7 +43,7 @@ app.get('/api/stock', (req, res) => {
     try {
         // Send the POST request to the proxy server
         const response = await fetch(proxyUrl, requestOptions);
-
+        console.log(response);
         if (!response.ok) {
         throw new Error('Network response was not ok');
         }
@@ -77,6 +77,7 @@ app.get('/api/stock', (req, res) => {
     let responseText = null;
     let retries = 0;
     const maxRetries = 2; // Maximum number of retries
+    console.log("HERE!!!")
 
     while (!responseText && retries <= maxRetries) {
         try {
@@ -114,51 +115,7 @@ app.get('/api/stock', (req, res) => {
     // Start waiting for the response with retry logic
     waitForResponseWithRetry();
 
-    /*const stockName = req.query.name;
-    const stock = fetchStockDetails(symbol); // Implement this function as per your requirements
-    const stocks = [
-        {
-            _id: '6611a71f66c74626f60c9dc2',
-            StockName: 'ALPHABET',
-            Price: 690,
-            MarketCap: 200000,
-            PERatio: 2,
-            MarketHigh: 700,
-            MarketLow: 680,
-            High52: 800,
-            Low52: 400
-        },
-        {
-            _id: '6611a71f66c74626f60c9dc3',
-            StockName: 'GOOGLE',
-            Price: 1900,
-            MarketCap: 1800000,
-            PERatio: 3,
-            MarketHigh: 2000,
-            MarketLow: 1850,
-            High52: 2200,
-            Low52: 1500
-        },
-        {
-            _id: '6611a71f66c74626f60c9dc4',
-            StockName: 'AMAZON',
-            Price: 3300,
-            MarketCap: 1500000,
-            PERatio: 4,
-            MarketHigh: 3400,
-            MarketLow: 3200,
-            High52: 3800,
-            Low52: 2900
-        }
-    ];
-
-    const stock = stocks.find(stock => stock.StockName.toUpperCase() === stockName.toUpperCase());
     
-    if (stock) {
-        res.json(stock);
-    } else {
-        res.status(404).json({ error: 'Stock not found' });
-    }*/
 });
 
 app.listen(PORT, () => {
