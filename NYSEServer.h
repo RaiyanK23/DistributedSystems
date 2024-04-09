@@ -14,11 +14,13 @@ public:
     ~NYSEServer();
 
     void handleConnection(const int clientSock) override;
+    
 
 private:
     //mongocxx::client _mongoClient; // MongoDB client instance
 
     // Function to initialize the MongoDB client
-    void initializeMongoClient();
+    //void initializeMongoClient();
+    std::string requestStockMongo(const std::string stockName);
 };
 #endif

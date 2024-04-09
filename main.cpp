@@ -1,16 +1,14 @@
 #include "ReplicatedServer.h"
 #include "Proxy.h"
 #include "NYSEServer.h"
+#include <mongocxx/instance.hpp>
 
 int main() {
     const size_t NUM_REPLICAS = 3;
 
-    // Create a replicated proxy server
-    //  Proxy primaryProxy(8083, "primaryProxy");
-    //  primaryProxy.acceptConnection();
+    mongocxx::instance inst{};
 
-    // NYSEServer primaryServer(8010, "NYSEServer");
-    // primaryServer.acceptConnection();
+
 
     ReplicatedServer<Proxy> replicatedProxy(NUM_REPLICAS, 8080, "Proxy");
     
